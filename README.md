@@ -1,6 +1,6 @@
 # 🌿 Body Balance – Nutrition & Wellness Website
 
-A modern full-stack web application built for a real business — my sister’s nutrition and wellness brand.
+A modern full-stack web application built for a real business - my sister nutrition and wellness brand.
 
 This platform represents a professional digital presence for a nutrition consultant, designed to support clients, manage inquiries, and provide a clean and modern user experience.
 
