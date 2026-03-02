@@ -1,31 +1,45 @@
-# 🚀 Project Name
+# 🌿 Body Balance – Nutrition & Wellness Website
 
-Modern Full-Stack Web Application built with Next.js 14, TypeScript and TailwindCSS.
+A modern full-stack web application built for a real business — my sister’s nutrition and wellness brand.
+
+This platform represents a professional digital presence for a nutrition consultant, designed to support clients, manage inquiries, and provide a clean and modern user experience.
 
 ---
 
-# 📌 Overview
+# 📌 About The Project
 
-This project is a production-ready web application built using modern technologies.
+This project was developed as a real-world business website for my sister’s nutrition brand.
 
-## ✨ Features
+The goal was to build:
 
-- ⚡ Fast performance with Next.js 14 (App Router)
-- 🎨 Beautiful UI with TailwindCSS + shadcn/ui
-- 🌙 Dark / Light Mode support
-- 🔐 Secure environment variables handling
-- 🧠 API routes for backend logic
-- 📦 Ready for deployment on Vercel
+- 🌿 A clean and professional landing page
+- 📱 Fully responsive design (mobile-first)
+- 🌙 Dark / Light mode support
+- 📥 Contact system with database storage
+- 🔐 Secure admin panel for managing submissions
+- 🚀 Production-ready deployment
+
+---
+
+# ✨ Features
+
+- ⚡ Built with Next.js 14 (App Router)
+- 🎨 Modern UI using TailwindCSS + shadcn/ui
+- 🌙 Dark / Light mode with next-themes
+- 🔐 Secure admin authentication using Environment Variables
+- 📥 Contact form connected to database
+- 📊 Admin dashboard with filtering and management tools
+- 🚀 Deployed on Vercel
 
 ---
 
 # 🛠 Tech Stack
 
-- Next.js 14 (App Router)
+- Next.js 14
 - TypeScript
 - TailwindCSS
 - shadcn/ui
-- next-themes (Dark Mode)
+- next-themes
 - Prisma (if used)
 - PostgreSQL / Firebase (if used)
 - Vercel
@@ -68,7 +82,7 @@ npm install
 npm run dev
 ```
 
-App runs on:
+Application runs on:
 
 ```
 http://localhost:3000
@@ -90,6 +104,24 @@ ADMIN_PASSWORD=your_secure_password
 
 ---
 
+# 🧑‍💻 Admin Panel
+
+Admin route:
+
+```
+/admin
+```
+
+Admin capabilities:
+
+- 🔑 Secure login
+- 📥 View contact submissions
+- ✅ Mark as handled
+- 🗑 Delete records
+- 📊 Filter by date
+
+---
+
 # 🌙 Dark Mode
 
 This project supports Dark / Light mode using:
@@ -97,46 +129,27 @@ This project supports Dark / Light mode using:
 - next-themes
 - Tailwind darkMode: "class"
 
-Theme selection is automatically saved in localStorage.
+The selected theme is automatically stored in localStorage.
 
 ---
 
-# 🧑‍💻 Admin Panel
+# 🚀 Deployment
 
-Route:
+Optimized for Vercel deployment.
 
-```
-/admin
-```
+Steps:
 
-## Admin Features
-
-- 🔑 Secure login (stored in ENV)
-- 📥 View contact submissions
-- ✅ Mark submissions as handled
-- 🗑 Delete records
-- 📊 Filter by date
-
----
-
-# 🚀 Deployment (Vercel)
-
-Push your project to GitHub, then:
-
-1. Go to https://vercel.com
-2. Import your repository
-3. Add your Environment Variables
+1. Push project to GitHub
+2. Import repository into Vercel
+3. Add Environment Variables
 4. Deploy
 
 ---
 
-# 📜 License
-
-This project is for educational / commercial use.
-
----
-
-# 👨‍💻 Author
+# 👨‍💻 Developer
 
 Developed by Yosef Khier  
 Software Engineering Student  
+Expected Graduation: March 2027  
+
+Built as a real-world production project for a family business.
