@@ -29,12 +29,18 @@ const LanguageContext = createContext<LanguageContextType>({
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("ar"); // matches layout default
 
+  const titles: Record<Lang, string> = {
+    ar: "براءة خير | إرشاد غذائي شخصي",
+    he: "בראאה ח'יר | ליווי תזונאי אישי",
+  };
+
   // Read stored preference on first client render
   useEffect(() => {
     const saved = localStorage.getItem("language") as Lang | null;
     if (saved === "he" || saved === "ar") {
       setLangState(saved);
       document.documentElement.lang = saved;
+      document.title = titles[saved];
     }
   }, []);
 
@@ -42,6 +48,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLangState(l);
     localStorage.setItem("language", l);
     document.documentElement.lang = l;
+    document.title = titles[l];
   };
 
   const toggle = () => setLang(lang === "ar" ? "he" : "ar");
