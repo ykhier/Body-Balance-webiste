@@ -10,6 +10,7 @@ import SearchBar from "./_components/SearchBar";
 import SubmissionRow, { type Submission } from "./_components/SubmissionRow";
 import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import FaqManager from "./_components/FaqManager";
 type Tab = "unread" | "read";
 
 export default function AdminDashboard() {
@@ -120,6 +121,19 @@ export default function AdminDashboard() {
                 📬 פניות
               </TabsTrigger>
               <TabsTrigger
+                value="faq"
+                className="relative px-5 py-2.5 rounded-none border-0 bg-transparent text-sm font-semibold text-gray-500 shadow-none
+                  data-[state=active]:text-[#4E8B6E] data-[state=active]:bg-transparent data-[state=active]:shadow-none
+                  data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-1px]
+                  data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[2px]
+                  data-[state=active]:after:bg-[#4E8B6E] data-[state=active]:after:rounded-t-full
+                  hover:text-gray-700 dark:text-gray-400 dark:data-[state=active]:text-emerald-400
+                  dark:data-[state=active]:after:bg-emerald-400 dark:hover:text-gray-200
+                  transition-colors"
+              >
+                ❓ שאלות נפוצות
+              </TabsTrigger>
+              <TabsTrigger
                 value="products"
                 className="relative px-5 py-2.5 rounded-none border-0 bg-transparent text-sm font-semibold text-gray-500 shadow-none
                   data-[state=active]:text-[#4E8B6E] data-[state=active]:bg-transparent data-[state=active]:shadow-none
@@ -204,6 +218,11 @@ export default function AdminDashboard() {
               </div>
             )}
           </div>
+        </TabsContent>
+
+        {/* ── FAQ tab ── */}
+        <TabsContent value="faq" className="mt-0 focus-visible:outline-none">
+          <FaqManager />
         </TabsContent>
 
         {/* ── Products tab ── */}

@@ -1,14 +1,17 @@
 "use client";
 
 import React from "react";
+import { useT } from "@/contexts/LanguageContext";
 
-export const NAV_LINKS = [
-  { label: "ראשי", href: "#hero" },
-  { label: "אודות", href: "#about" },
-  { label: "קהלי יעד", href: "#audience" },
-  { label: "שירותים", href: "#services" },
-  { label: "תשלום", href: "#payment" },
-  { label: "צרו קשר", href: "#contact" },
+// Maps href → translation key in t.nav
+export const NAV_LINKS: { key: keyof ReturnType<typeof useT>["nav"]; href: string }[] = [
+  { key: "main", href: "#hero" },
+  { key: "about", href: "#about" },
+  { key: "audience", href: "#audience" },
+  { key: "services", href: "#services" },
+  { key: "payment", href: "#payment" },
+  { key: "faq", href: "#faq" },
+  { key: "contact", href: "#contact" },
 ];
 
 export default function NavLink({
@@ -57,12 +60,15 @@ export function NavLinks({
   footer?: boolean;
   skip?: string;
 }) {
+  const t = useT();
+
   return (
     <>
       {NAV_LINKS.filter((l) => l.href !== skip).map((link) => (
         <NavLink
           key={link.href}
-          {...link}
+          href={link.href}
+          label={t.nav[link.key] as string}
           onClick={onClick}
           mobile={mobile}
           footer={footer}

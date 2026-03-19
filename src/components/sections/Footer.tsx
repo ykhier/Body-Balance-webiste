@@ -1,9 +1,9 @@
 // src/components/sections/Footer.tsx
-// Clean footer with social icons, email, and copyright
 "use client";
 
 import React from "react";
 import NavLink, { NavLinks } from "@/components/ui/NavLink";
+import { useT } from "@/contexts/LanguageContext";
 
 const SOCIAL_LINKS = [
   {
@@ -37,10 +37,12 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
+  const t = useT();
+  const f = t.footer;
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white" aria-label="כותרת תחתונה">
+    <footer className="bg-gray-900 text-white" aria-label={f.contactTitle}>
       {/* Top wave divider */}
       <div className="overflow-hidden leading-none">
         <svg
@@ -63,25 +65,24 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <p className="text-2xl font-extrabold text-rose-400 mb-3">
-              בראאה חיר 🌿
+              {t.hero.name} 🌿
             </p>
             <p className="text-gray-400 text-sm leading-relaxed">
-              מאמנת תזונה מוסמכת. ליווי אישי, תוכניות מותאמות ותמיכה יומיומית
-              לאורח חיים בריא ומאוזן.
+              {f.brandDesc}
             </p>
           </div>
 
           {/* Quick links */}
           <div>
-            <p className="font-bold text-white mb-4">ניווט מהיר</p>
-            <nav className="flex flex-col gap-2" aria-label="ניווט תחתית">
+            <p className="font-bold text-white mb-4">{f.quickLinks}</p>
+            <nav className="flex flex-col gap-2" aria-label={f.quickLinks}>
               <NavLinks footer skip="#hero" />
             </nav>
           </div>
 
           {/* Contact + Social */}
           <div>
-            <p className="font-bold text-white mb-4">צרו קשר</p>
+            <p className="font-bold text-white mb-4">{f.contactTitle}</p>
             <a
               href="tel:0542576613"
               className="text-gray-400 hover:text-rose-400 transition-colors text-sm block mb-2"
@@ -116,9 +117,7 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="border-t border-gray-800 mt-10 pt-6 text-center">
-          <p className="text-gray-500 text-sm">
-            © {year} בראאה חיר | ליווי תזונתי אישי - כל הזכיות שמורות .
-          </p>
+          <p className="text-gray-500 text-sm">{f.copyright(year)}</p>
         </div>
       </div>
     </footer>

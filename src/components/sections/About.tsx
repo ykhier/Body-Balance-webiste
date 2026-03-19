@@ -1,17 +1,21 @@
-﻿// src/components/sections/About.tsx
+// src/components/sections/About.tsx
 "use client";
 
 import React from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
-
-const HIGHLIGHTS = [
-  { icon: "🌱", text: "תהליך אישי" },
-  { icon: "⚖️", text: "איזון ולא ויתורים" },
-  { icon: "📲", text: "תמיכה יומיומית" },
-  { icon: "💪", text: "תוצאות ארוכות טווח" },
-];
+import { useT } from "@/contexts/LanguageContext";
 
 export default function About() {
+  const t = useT();
+  const a = t.about;
+
+  const HIGHLIGHTS = [
+    { icon: "🌱", text: a.highlights.personal },
+    { icon: "⚖️", text: a.highlights.balance },
+    { icon: "📲", text: a.highlights.daily },
+    { icon: "💪", text: a.highlights.results },
+  ];
+
   return (
     <section
       id="about"
@@ -34,10 +38,9 @@ export default function About() {
                 &quot;
               </span>
               <p className="text-gray-600 dark:text-gray-300 italic text-base leading-relaxed relative z-10 pt-6">
-                &quot;הדרך לאורח חיים בריא מתחילה בצעד אחד קטן – ואני כאן ללכת
-                אותה יחד איתך.&quot;
+                &quot;{a.quote}&quot;
               </p>
-              <p className="mt-4 font-bold text-rose-500 text-sm">בראאה חיר</p>
+              <p className="mt-4 font-bold text-rose-500 text-sm">{t.hero.name}</p>
               <div className="mt-6 grid grid-cols-2 gap-2">
                 {HIGHLIGHTS.map((h) => (
                   <div
@@ -57,30 +60,14 @@ export default function About() {
           {/* Text Content */}
           <div data-reveal data-from="left" data-delay="180" className="flex-1">
             <SectionTitle
-              title="קצת עליי"
-              subtitle="הסיפור שלי הוא ההוכחה שהשינוי אפשרי"
+              title={a.title}
+              subtitle={a.subtitle}
               center={false}
             />
             <div className="space-y-4 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-              <p>
-                לפני מספר שנים, גם אני עמדתי בנקודה שבה הרגשתי תקועה. ניסיתי
-                דיאטות שונות, וויתרתי על דברים שאהבתי עד שהבנתי שהדרך הנכונה היא
-                לא ויתור, אלא <strong className="text-rose-500">איזון</strong>.
-              </p>
-              <p>
-                לאחר שהצלחתי לרדת במשקל ולשנות את אורח חיי בצורה שמחזיקה לאורך
-                זמן, החלטתי ללמוד תזונה ולהפוך את הידע לשליחות. היום, כמאמנת
-                תזונה מוסמכת עם ניסיון של{" "}
-                <strong className="text-rose-500">שלוש שנים</strong>, אני מלווה
-                אנשים מכל הגילאים לבנות הרגלים בריאים שמתאימים לחיים האמיתיים
-                שלהם.
-              </p>
-              <p>
-                הגישה שלי פשוטה:{" "}
-                <strong className="text-rose-500">ליווי אישי ואמיתי</strong>,
-                תוכנית שמותאמת בדיוק לך ותמיכה שוטפת שתשמור אותך ממוקדת גם
-                ברגעים הקשים. כי אנחנו לא עושים את זה לבד.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: a.p1 }} />
+              <p dangerouslySetInnerHTML={{ __html: a.p2 }} />
+              <p dangerouslySetInnerHTML={{ __html: a.p3 }} />
             </div>
           </div>
         </div>

@@ -4,8 +4,12 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PLANS } from "./plans";
 import PlanCard from "./PlanCard";
+import { useT } from "@/contexts/LanguageContext";
 
 export default function Payment() {
+  const t = useT();
+  const p = t.payment;
+
   return (
     <section
       id="payment"
@@ -14,13 +18,13 @@ export default function Payment() {
       <div className="section-container max-w-lg mx-auto">
         {/* Header */}
         <div data-reveal className="text-center mb-10">
-          <SectionTitle title="תשלום" subtitle="בחרי את החבילה המתאימה לך" />
+          <SectionTitle title={p.title} subtitle={p.subtitle} />
         </div>
 
         {/* Package selector */}
         <div data-reveal data-delay="100">
           <Tabs defaultValue="1m" dir="rtl" className="w-full">
-            <TabsList className="w-full mb-8 bg-gray-100 dark:bg-gray-800 rounded-2xl p-1 h-auto gap-1 border border-rose-200 dark:border-gray-700 ">
+            <TabsList className="w-full mb-8 bg-gray-100 dark:bg-gray-800 rounded-2xl p-1 h-auto gap-1 border border-rose-200 dark:border-gray-700">
               {PLANS.map((plan) => (
                 <TabsTrigger
                   key={plan.id}
@@ -32,14 +36,17 @@ export default function Payment() {
                     data-[state=active]:to-rose-600 data-[state=active]:text-white
                     data-[state=active]:shadow-md"
                 >
-                  {plan.tabLabel}
+                  {p.tabs[plan.id as keyof typeof p.tabs]}
                 </TabsTrigger>
               ))}
             </TabsList>
 
             {PLANS.map((plan) => (
               <TabsContent key={plan.id} value={plan.id}>
-                <PlanCard plan={plan} />
+                <PlanCard
+                  plan={plan}
+                  tabLabel={p.tabs[plan.id as keyof typeof p.tabs]}
+                />
               </TabsContent>
             ))}
           </Tabs>

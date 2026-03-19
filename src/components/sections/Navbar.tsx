@@ -4,9 +4,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 import { NavLinks } from "@/components/ui/NavLink";
+import { useT } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -74,19 +77,20 @@ export default function Navbar() {
         {/* Desktop links */}
         <nav
           className="hidden md:flex items-center gap-6"
-          aria-label="ניווט ראשי"
+          aria-label={t.nav.mainNav}
         >
           <NavLinks onClick={handleNavClick} />
         </nav>
 
-        {/* Actions: theme toggle + mobile hamburger */}
+        {/* Actions: language toggle + theme toggle + mobile hamburger */}
         <div className="flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           {/* Mobile hamburger */}
           <button
             className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-rose-50 dark:hover:bg-gray-800 transition"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="תפריט ניווט"
+            aria-label={t.nav.mainMenu}
             aria-expanded={menuOpen}
           >
             <span
@@ -106,7 +110,7 @@ export default function Navbar() {
       {menuOpen && (
         <nav
           className="md:hidden bg-white dark:bg-gray-900 backdrop-blur border-t border-rose-100 dark:border-gray-700 px-6 py-4 flex flex-col gap-4"
-          aria-label="תפריט נייד"
+          aria-label={t.nav.mobileNav}
         >
           <NavLinks onClick={handleNavClick} mobile />
         </nav>

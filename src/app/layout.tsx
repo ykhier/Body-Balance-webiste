@@ -1,27 +1,30 @@
 // src/app/layout.tsx
-// Root layout — sets RTL direction, Hebrew font, and metadata
+// Root layout — sets RTL direction, Rubik font (Hebrew + Arabic + Latin), and metadata.
+// Default language is Arabic ("ar"); LanguageProvider updates lang attr on client
+// from localStorage without a layout shift (suppressHydrationWarning).
 
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import ScrollAnimations from "@/components/ui/ScrollAnimations";
 
 const rubik = Rubik({
-  subsets: ["hebrew", "latin"],
+  subsets: ["arabic", "hebrew", "latin"],
   variable: "--font-rubik",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "בראאה חיר | ליווי תזונאי אישי",
+  title: "براءة خير | إرشاد غذائي شخصي",
   description:
-    "בראאה חיר – מאמנת תזונה מוסמכת עם ניסיון של שנתיים. תוכניות תזונה אישיות, ליווי יומי וסגנון חיים בריא ללא ויתורים.",
-  keywords: ["תזונה", "דיאטה", "ירידה במשקל", "ליווי תזונאי", "בראאה חיר"],
+    "براءة خير – مدربة تغذية معتمدة بخبرة ثلاث سنوات. برامج تغذية شخصية، متابعة يومية ونمط حياة صحي دون تنازلات.",
+  keywords: ["تغذية", "رجيم", "إنقاص الوزن", "مدربة تغذية", "براءة خير"],
   openGraph: {
-    title: "בראאה חיר | ליווי תזונאי אישי",
-    description: "תוכניות תזונה אישיות וליווי יומי לאורח חיים בריא",
-    locale: "he_IL",
+    title: "براءة خير | إرشاد غذائي شخصي",
+    description: "برامج تغذية شخصية ومتابعة يومية لنمط حياة صحي",
+    locale: "ar_IL",
   },
 };
 
@@ -29,8 +32,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    // dir="rtl" + lang="he" for full RTL & Hebrew support
-    <html lang="he" dir="rtl" suppressHydrationWarning className={rubik.variable}>
+    // Default lang="ar" matches LanguageContext default.
+    // suppressHydrationWarning prevents React warning when LanguageProvider
+    // updates lang from localStorage on client mount.
+    <html
+      lang="ar"
+      dir="rtl"
+      suppressHydrationWarning
+      className={rubik.variable}
+    >
       <head>
         <link
           rel="icon"
@@ -39,14 +49,16 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <ScrollAnimations />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange={false}
-        >
-          {children}
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange={false}
+          >
+            {children}
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

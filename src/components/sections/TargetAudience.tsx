@@ -1,46 +1,22 @@
-﻿// src/components/sections/TargetAudience.tsx
+// src/components/sections/TargetAudience.tsx
 "use client";
 
 import React from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
+import { useT } from "@/contexts/LanguageContext";
 
-const AUDIENCE_DATA = [
-  {
-    icon: "🧒",
-    title: "ילדים",
-    description:
-      "תוכניות תזונה מותאמות לילדים הכוללות הרגלי אכילה בריאים, מזונות עשירים בוויטמינים ותמיכה בצמיחה תקינה בצורה כיפית ואהובה.",
-    color: "bg-rose-50",
-    textColor: "text-rose-500",
-  },
-  {
-    icon: "🌿",
-    title: "אורח חיים בריא",
-    description:
-      "ליווי תזונתי למי שרוצה לשמור על אורח חיים בריא ומאוזן, בניית תפריט יומי מגוון, שיפור הרגלים והטמעת שגרה נכונה לאורך זמן  בלי קיצוניות ובלי תחושת ויתור.",
-    color: "bg-green-50",
-    textColor: "text-green-600",
-  },
-  {
-    icon: "⚖️",
-    title: "ירידה במשקל",
-    description:
-      "תוכנית ירידה במשקל בגישה מאוזנת וללא רעב, מתמקדת בשינוי הרגלים לטווח ארוך ולא בדיאטה זמנית.",
-    color: "bg-rose-50",
-    textColor: "text-rose-500",
-  },
-  {
-    icon: "💪",
-    title: "עלייה במסת שריר",
-    description:
-      "תזונה תומכת עבור מי שרוצה לבנות מסת שריר תפריטים עתירי חלבון, עיתוי ארוחות מדויק ותמיכה לצד אימונים.",
-    color: "bg-emerald-50",
-    textColor: "text-emerald-600",
-  },
+const COLORS = [
+  { color: "bg-rose-50", textColor: "text-rose-500", icon: "🧒" },
+  { color: "bg-green-50", textColor: "text-green-600", icon: "🌿" },
+  { color: "bg-rose-50", textColor: "text-rose-500", icon: "⚖️" },
+  { color: "bg-emerald-50", textColor: "text-emerald-600", icon: "💪" },
 ];
 
 export default function TargetAudience() {
+  const t = useT();
+  const items = t.audience.items.map((item, i) => ({ ...item, ...COLORS[i] }));
+
   return (
     <section
       id="audience"
@@ -50,12 +26,12 @@ export default function TargetAudience() {
       <div className="section-container">
         <div data-reveal>
           <SectionTitle
-            title="קהלי יעד"
-            subtitle="מתאים לכל מי שרוצה לשפר את התזונה שלו בלי קשר לגיל, מטרה או סגנון חיים"
+            title={t.audience.title}
+            subtitle={t.audience.subtitle}
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {AUDIENCE_DATA.map((item, i) => (
+          {items.map((item, i) => (
             <div
               key={item.title}
               data-reveal

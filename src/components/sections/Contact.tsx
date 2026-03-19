@@ -1,6 +1,4 @@
 // src/components/sections/Contact.tsx
-// Contact section with client-side form that calls the API route
-
 "use client";
 
 import React, { useState } from "react";
@@ -8,6 +6,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import VIcon from "../ui/vIcon";
 import LoadingIcon from "../ui/LoadingIcon";
 import { Input } from "@/components/ui/Input";
+import { useT } from "@/contexts/LanguageContext";
 
 type ContactFormData = {
   name: string;
@@ -16,26 +15,12 @@ type ContactFormData = {
   message: string;
 };
 
-// Field definitions for the form
-const FIELDS: {
-  name: keyof ContactFormData;
-  label: string;
-  type: string;
-  placeholder: string;
-}[] = [
-  { name: "name", label: "שם מלא", type: "text", placeholder: "שם מלא" },
-  {
-    name: "email",
-    label: "מייל",
-    type: "email",
-    placeholder: "braahkhier@gmail.com",
-  },
-  { name: "phone", label: "טלפון", type: "tel", placeholder: "0542576613" },
-];
-
 const EMPTY: ContactFormData = { name: "", email: "", phone: "", message: "" };
 
 export default function Contact() {
+  const t = useT();
+  const c = t.contact;
+
   const [formData, setFormData] = useState<ContactFormData>(EMPTY);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -67,14 +52,40 @@ export default function Contact() {
         setFormData(EMPTY);
       } else {
         setStatus("error");
-        setErrorMsg(result?.error ?? "שגיאה לא ידועה. נסי שוב.");
+        setErrorMsg(result?.error ?? c.errorDefault);
       }
     } catch (err) {
       console.error("Contact form error:", err);
       setStatus("error");
-      setErrorMsg("שגיאה בשליחת הטופס. נסי שוב מאוחר יותר.");
+      setErrorMsg(c.errorNetwork);
     }
   };
+
+  const FIELDS: {
+    name: keyof ContactFormData;
+    label: string;
+    type: string;
+    placeholder: string;
+  }[] = [
+    {
+      name: "name",
+      label: c.fields.name.label,
+      type: "text",
+      placeholder: c.fields.name.placeholder,
+    },
+    {
+      name: "email",
+      label: c.fields.email.label,
+      type: "email",
+      placeholder: c.fields.email.placeholder,
+    },
+    {
+      name: "phone",
+      label: c.fields.phone.label,
+      type: "tel",
+      placeholder: c.fields.phone.placeholder,
+    },
+  ];
 
   return (
     <section
@@ -84,10 +95,7 @@ export default function Contact() {
     >
       <div className="section-container max-w-3xl">
         <div data-reveal>
-          <SectionTitle
-            title="צרו קשר"
-            subtitle="יש לכן שאלה?   דברו איתי ישירות 💌"
-          />
+          <SectionTitle title={c.title} subtitle={c.subtitle} />
         </div>
 
         {/* Success state */}
@@ -100,16 +108,16 @@ export default function Contact() {
               <VIcon name="check" className="w-12 h-12 text-emerald-500" />
             </div>
             <h3 className="text-xl font-extrabold text-emerald-700 dark:text-emerald-300 mb-2">
-              ההודעה נשלחה בהצלחה!
+              {c.successTitle}
             </h3>
             <p className="text-emerald-600 dark:text-emerald-300 text-sm leading-relaxed mb-6">
-              תודה שפנית, אחזור אליכם בהקדם האפשרי 🌿
+              {c.successDesc}
             </p>
             <button
               onClick={() => setStatus("idle")}
               className="text-emerald-600 dark:text-emerald-300 font-semibold underline text-sm hover:text-emerald-800 dark:hover:text-emerald-100"
             >
-              שליחת הודעה נוספת
+              {c.sendAnother}
             </button>
           </div>
         ) : (
@@ -120,7 +128,7 @@ export default function Contact() {
             data-from="scale"
             data-delay="80"
             className="relative bg-white/80 backdrop-blur-sm dark:bg-gray-800 rounded-3xl shadow-card border border-rose-100/60 dark:border-gray-700 p-8 ring-1 ring-rose-100 dark:ring-0"
-            aria-label="טופס יצירת קשר"
+            aria-label={c.formAriaLabel}
           >
             {/* Text fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
@@ -156,7 +164,7 @@ export default function Contact() {
             {/* Message textarea */}
             <div className="mb-6">
               <label htmlFor="message" className="form-label">
-                הודעה
+                {c.fields.message.label}
               </label>
               <textarea
                 id="message"
@@ -164,7 +172,7 @@ export default function Contact() {
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="כתבי כאן את ההודעה..."
+                placeholder={c.fields.message.placeholder}
                 required
                 disabled={status === "loading"}
                 className="form-input resize-none disabled:opacity-60"
@@ -193,10 +201,10 @@ export default function Contact() {
               {status === "loading" ? (
                 <span className="flex items-center justify-center gap-2">
                   <LoadingIcon />
-                  שולח...
+                  {c.sending}
                 </span>
               ) : (
-                "שלחי הודעה 📩"
+                c.submit
               )}
             </button>
           </form>
