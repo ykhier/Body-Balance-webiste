@@ -40,7 +40,7 @@ export default function FaqForm({
           active={activeTab === "he"}
           onClick={() => setActiveTab("he")}
           filled={!!heValid}
-          label="🇮🇱 עברית"
+          label="עברית"
         />
         <TabBtn
           active={activeTab === "ar"}
@@ -82,9 +82,12 @@ export default function FaqForm({
             <button
               type="button"
               onClick={() => setActiveTab("ar")}
-              className="text-xs text-[#4E8B6E] hover:underline font-medium"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#4E8B6E] bg-[#4E8B6E]/10 hover:bg-[#4E8B6E]/20 px-3 py-1.5 rounded-lg transition-colors"
             >
-              ← עבור להזנת הערבית
+              <svg className="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+              עבור לערבית
             </button>
           )}
         </div>
@@ -120,9 +123,12 @@ export default function FaqForm({
             <button
               type="button"
               onClick={() => setActiveTab("he")}
-              className="text-xs text-[#4E8B6E] hover:underline font-medium"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#4E8B6E] bg-[#4E8B6E]/10 hover:bg-[#4E8B6E]/20 px-3 py-1.5 rounded-lg transition-colors"
             >
-              ← עבור להזנת העברית
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+              עבור לעברית
             </button>
           )}
         </div>
